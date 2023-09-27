@@ -13,20 +13,15 @@ public class Main {
     tx.begin();
 
     try {
-      // JPA를 사용하여 업데이트
-      // Member findMember = em.find(Member.class, 1L);
-      // findMember.setName("HelloJPA");
+      
+      //비영속
+      Member member = new Member();
+      member.setId(100L);
+      member.setName("HelloJPA");
 
-      // JPQL을 사용하여 페이지네이션
-      List<Member> result = em.createQuery("select m from Member as m", Member.class)
-          .setFirstResult(1)
-          .setMaxResults(10)
-          .getResultList();
-
-      for (Member member : result) {
-        System.out.println("member.name = " + member.getName());
-      }
-
+      //영속 (객체를 저장한 상태)
+      em.persist(member);
+      
       tx.commit();
     } catch (Exception e) {
       tx.rollback();
