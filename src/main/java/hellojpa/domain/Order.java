@@ -12,7 +12,7 @@ public class Order {
   private Long id;
 
   @ManyToOne
-  @JoinColumn(name = "MEMBER_ID")
+  @JoinColumn(name = "MEMBER_ID", insertable = false, updatable = false)
   private Member member;
 
   private LocalDateTime orderDate;

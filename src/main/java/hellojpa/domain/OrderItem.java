@@ -8,10 +8,10 @@ public class OrderItem {
   @Column(name = "ORDER_ITEM_ID")
   private Long id;
   @ManyToOne
-  @JoinColumn(name = "ORDER_ID")
+  @JoinColumn(name = "ORDER_ID", insertable = false, updatable = false)
   private Order order;
   @ManyToOne
-  @JoinColumn(name = "ITEM_ID")
+  @JoinColumn(name = "ITEM_ID", insertable = false, updatable = false)
   private Item item;
   private int orderPrice;
   private int count;
