@@ -13,10 +13,6 @@ public class Member extends BaseEntity {
   private String street;
   private String zipcode;
 
-  @OneToOne
-  @JoinColumn(name = "LOCKER_ID")
-  private Locker locker;
-
   public Long getId() {
     return id;
   }
