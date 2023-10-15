@@ -2,6 +2,8 @@ package hellojpa.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 public class Delivery extends BaseEntity {
 
@@ -12,6 +14,6 @@ public class Delivery extends BaseEntity {
 
   private String street;
 
-  @OneToOne(fetch = FetchType.LAZY, mappedBy = "delivery")
+  @OneToOne(fetch = LAZY, mappedBy = "delivery")
   private Order order;
 }

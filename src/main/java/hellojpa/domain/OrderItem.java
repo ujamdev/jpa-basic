@@ -2,15 +2,17 @@ package hellojpa.domain;
 
 import javax.persistence.*;
 
+import static javax.persistence.FetchType.*;
+
 @Entity
 public class OrderItem extends BaseEntity {
   @Id @GeneratedValue
   @Column(name = "ORDER_ITEM_ID")
   private Long id;
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "ORDER_ID", insertable = false, updatable = false)
   private Order order;
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne(fetch = LAZY)
   @JoinColumn(name = "ITEM_ID", insertable = false, updatable = false)
   private Item item;
   private int orderPrice;
