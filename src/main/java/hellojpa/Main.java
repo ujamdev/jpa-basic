@@ -1,32 +1,15 @@
 package hellojpa;
 
-import javax.persistence.*;
-import java.util.List;
+import hellojpa.domain.Address;
 
 public class Main {
   public static void main(String[] args) {
-    EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
 
-    EntityManager em = emf.createEntityManager();
+    Address address1 = new Address("city", "street", "10000");
+    Address address2 = new Address("city", "street", "10000");
 
-    EntityTransaction tx = em.getTransaction();
-    tx.begin();
+    System.out.println("address1 == address2: " + (address1 == address2));
+    System.out.println("address1 equals address2: " + (address1.equals(address2)));
 
-    try {
-
-      Member member = em.find(Member.class, 150L);
-      member.setName("AAAAA");
-
-      //준영속
-      em.detach(member);
-
-      tx.commit();
-    } catch (Exception e) {
-      tx.rollback();
-    } finally {
-      em.close();
-    }
-
-    emf.close();
   }
 }
