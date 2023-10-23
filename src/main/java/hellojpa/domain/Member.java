@@ -15,6 +15,8 @@ public class Member extends BaseEntity {
 
   private String name;
 
+  private int age;
+
   @Embedded
   private Address homeAddress;
 
@@ -70,5 +72,13 @@ public class Member extends BaseEntity {
 
   public void setAddressHistory(List<Address> addressHistory) {
     this.addressHistory = addressHistory;
+  }
+
+  public int getAge() {
+    return age;
+  }
+
+  public void setAge(int age) {
+    this.age = age;
   }
 }
