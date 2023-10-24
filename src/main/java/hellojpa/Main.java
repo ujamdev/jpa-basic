@@ -28,12 +28,17 @@ public class Main {
       em.flush();
       em.clear();
 
-      List<MemberDTO> result = em.createQuery("select new jpql.MemberDTO(m.name, m.age) from Member m", MemberDTO.class)
+      List<MemberDTO> result = em.createQuery("select m from Member m order by m.age desc", MemberDTO.class)
+          .setFirstResult(1)
+          .setMaxResults(10)
           .getResultList();
 
-      MemberDTO memberDTO = result.get(0);
-      System.out.println("memberDTO = " + memberDTO.getName());
-      System.out.println("memberDTO = " + memberDTO.getAge());
+      System.out.println("result.size = " + result.size());
+
+      for (MemberDTO member1 : result) {
+        System.out.println("member1 = " + member1);
+      }
+
       tx.commit();
     } catch (Exception e) {
       tx.rollback();
