@@ -28,16 +28,10 @@ public class Main {
       em.flush();
       em.clear();
 
-      List<MemberDTO> result = em.createQuery("select m from Member m order by m.age desc", MemberDTO.class)
-          .setFirstResult(1)
-          .setMaxResults(10)
+      List<Member> result = em.createQuery("select m from Member m where m.age > (select avg(m2.age) from Member m2)", Member.class)
           .getResultList();
 
       System.out.println("result.size = " + result.size());
-
-      for (MemberDTO member1 : result) {
-        System.out.println("member1 = " + member1);
-      }
 
       tx.commit();
     } catch (Exception e) {
