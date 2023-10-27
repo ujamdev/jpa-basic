@@ -20,18 +20,31 @@ public class Main {
 
     try {
 
-      Member member = new Member();
-      member.setName("member1");
-      member.setAge(10);
-      em.persist(member);
+      Member member1 = new Member();
+      member1.setName("member1");
+      em.persist(member1);
+
+      Member member2 = new Member();
+      member2.setName("member1");
+      em.persist(member2);
 
       em.flush();
       em.clear();
 
-      List<Member> result = em.createQuery("select case when m.age <= 19 then '학생요금' when m.age >= 60 then '경로요금' else '일반요금' end from Member m", Member.class)
-          .getResultList();
+      String query1 = "select concat('a', 'b') From Member m";
+      String query2 = "select substring(m.name, 2, 3) From Member m";
+      String query3 = "select locate('de','abcdegf') From Member m";
 
-      System.out.println("result = " + result);
+      List<Member> result1 = em.createQuery(query1, Member.class)
+          .getResultList();
+      List<Member> result2 = em.createQuery(query2, Member.class)
+              .getResultList();
+      List<Integer> result3 = em.createQuery(query3, Integer.class)
+              .getResultList();
+
+      System.out.println("result = " + result1);
+      System.out.println("result = " + result2);
+      System.out.println("result = " + result3);
 
       tx.commit();
     } catch (Exception e) {
