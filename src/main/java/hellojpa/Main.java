@@ -25,26 +25,28 @@ public class Main {
       em.persist(member1);
 
       Member member2 = new Member();
-      member2.setName("member1");
+      member2.setName("member2");
       em.persist(member2);
 
       em.flush();
       em.clear();
 
-      String query1 = "select concat('a', 'b') From Member m";
-      String query2 = "select substring(m.name, 2, 3) From Member m";
-      String query3 = "select locate('de','abcdegf') From Member m";
+      //엔티티를 파라미터로 전달
+      String query = "select m.name From Member m where m = :member";
 
-      List<Member> result1 = em.createQuery(query1, Member.class)
+      //식별자를 파라미터로 전달
+      String query1 = "select m.name From Member m where m.id = :memberId";
+
+      List<Member> result = em.createQuery(query, Member.class)
+          .setParameter("member", member1)
           .getResultList();
-      List<Member> result2 = em.createQuery(query2, Member.class)
-              .getResultList();
-      List<Integer> result3 = em.createQuery(query3, Integer.class)
-              .getResultList();
 
-      System.out.println("result = " + result1);
-      System.out.println("result = " + result2);
-      System.out.println("result = " + result3);
+      List<Member> result1 = em.createQuery(query, Member.class)
+          .setParameter("member", member2.getId())
+          .getResultList();
+
+      System.out.println("result = " + result);
+      System.out.println("result1 = " + result1);
 
       tx.commit();
     } catch (Exception e) {
